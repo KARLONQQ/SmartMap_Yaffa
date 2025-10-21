@@ -1,31 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ملصق QR — يافا الشاملة (عرض متعدد اللغات)</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+<title>بوستر QR - مدرسة يافا الشاملة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;display:grid;place-items:center;min-height:100vh;background:#000;color:#f5f5f5;font-family:"Cairo",system-ui}
-  .poster{border:2px solid #ffd700;padding:30px;border-radius:20px;text-align:center;max-width:720px;width:92%}
-  h1{color:#ffd700;margin-bottom:10px}
-  .muted{color:#aaa}
-  img{margin:20px 0;width:300px;height:300px}
-  .url{direction:ltr;background:#0b1020;border:1px solid #1f2937;border-radius:10px;padding:8px 12px;display:inline-block}
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #111, #000);
+  color: #f5f5f5;
+  font-family: 'Cairo', sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,215,0,0.12), transparent 70%);
+  filter: blur(80px);
+  z-index: -1;
+}
+.poster {
+  margin-top: 5vh;
+  padding: 40px;
+  border: 2px solid #ffd700;
+  border-radius: 30px;
+  display: inline-block;
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 0 60px rgba(255,215,0,0.15), inset 0 0 20px rgba(255,215,0,0.1);
+  animation: fadeIn 2s ease;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
+}
+.logo {
+  width: 140px;
+  height: 140px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(255,215,0,0.3);
+}
+h1 {
+  color: #ffd700;
+  font-size: 32px;
+  margin: 20px 0 10px;
+  text-shadow: 0 0 25px rgba(255,215,0,0.6);
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from {text-shadow: 0 0 15px rgba(255,215,0,0.4);}
+  to {text-shadow: 0 0 40px rgba(255,215,0,0.8);}
+}
+p.sub {
+  color: #aaa;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.qr-box {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 25px;
+  border: 2px solid rgba(255,215,0,0.5);
+  display: inline-block;
+  box-shadow: 0 0 40px rgba(255,215,0,0.2);
+  transition: transform 0.3s;
+}
+.qr-box:hover { transform: scale(1.05); }
+.qr-box img {
+  width: 280px;
+  height: 280px;
+}
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #ffd700, #ffea94);
+  color: #000;
+  padding: 12px 26px;
+  border-radius: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(255,215,0,0.4);
+  transition: 0.3s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px rgba(255,215,0,0.7);
+}
+footer {
+  margin-top: 40px;
+  color: #888;
+  font-size: 14px;
+}
+footer strong { color: #ffd700; }
 </style>
 </head>
 <body>
-  <div class="poster">
-    <h1>📱 امسح الرمز لفتح العرض الفخم (3 لغات)</h1>
-    <p class="muted">العربية • English • עברית — شاشة ترحيب سينمائية ثم شرح كامل للمشروع</p>
-    <img id="qr" alt="QR Code" src="" decoding="async">
-    <div id="url" class="muted url">https://example.com/yaffa</div>
-    <p class="muted">إن لم يعمل المسح، افتح الرابط يدويًا.</p>
+<div class="glow"></div>
+<div class="poster">
+  <img src="yaffa-logo.png" alt="شعار المدرسة" class="logo" onerror="this.style.display='none'">
+  <h1>امسح الكود لتجربة العرض الذكي للمدرسة</h1>
+  <p class="sub">العربية • English • עברית — تجربة فخمة بتصميم ذهبي سينمائي</p>
+  <div class="qr-box">
+    <img id="qr" alt="QR Code">
   </div>
+  <br>
+  <a id="openBtn" class="btn" target="_blank">افتح الموقع الآن</a>
+  <p class="sub" id="url"></p>
+  <footer>Made by <strong>@Karlonqq</strong> — محمود أبوقاعود</footer>
+</div>
+
+<audio autoplay>
+  <source src="https://cdn.pixabay.com/download/audio/2023/09/10/audio_740c07b47f.mp3?filename=cinematic-opener-16474.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-  const LANDING_URL = 'https://example.com/yaffa'; // غيّر هذا بالرابط الحقيقي
+  const LANDING_URL = "https://karlonqq.github.io/SmartMap_Yaffa/"; // ← هنا تحط رابط موقعك الفعلي
+  
   document.getElementById('url').textContent = LANDING_URL;
-  document.getElementById('qr').src = 'https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=' + encodeURIComponent(LANDING_URL);
+  document.getElementById('openBtn').href = LANDING_URL;
+  document.getElementById('qr').src =
+    'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=' +
+    encodeURIComponent(LANDING_URL);
 </script>
 </body>
 </html>
