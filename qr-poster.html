@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -18,13 +17,13 @@
 <body>
   <div class="poster">
     <h1>📱 امسح الرمز لفتح العرض الفخم (3 لغات)</h1>
-    <p class="muted">العربية • English • עברית — شاشة ترحيب موسيقية ثم شرح كامل للمشروع</p>
+    <p class="muted">العربية • English • עברית — شاشة ترحيب سينمائية ثم شرح كامل للمشروع</p>
     <img id="qr" alt="QR Code" src="" decoding="async">
     <div id="url" class="muted url">https://example.com/yaffa</div>
     <p class="muted">إن لم يعمل المسح، افتح الرابط يدويًا.</p>
   </div>
 <script>
-  const LANDING_URL = 'https://example.com/yaffa'; // 🔁 بدّل هذا بالرابط الحقيقي بعد الرفع
+  const LANDING_URL = 'https://example.com/yaffa'; // غيّر هذا بالرابط الحقيقي
   document.getElementById('url').textContent = LANDING_URL;
   document.getElementById('qr').src = 'https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=' + encodeURIComponent(LANDING_URL);
 </script>
