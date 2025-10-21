@@ -1,0 +1,298 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مدرسة يافا الشاملة — عرض مشروع الخريطة الذكية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05060a; --gold:#f2d27a; --gold-strong:#ffd700; --blue:#0ea5e9;
+    --fg:#e6edf3; --muted:#9aa4b2; --card:#0a0f1c; --line:#1b2330;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:radial-gradient(1100px 700px at 70% -10%, rgba(14,165,233,.10), transparent 60%), #000; color:var(--fg); font-family:"Cairo",system-ui; line-height:1.8}
+  a{color:var(--gold)}
+  .hidden{display:none}
+  .center{display:grid;place-items:center}
+  .logo{width:110px;height:110px;border-radius:16px;object-fit:cover;box-shadow:0 0 40px rgba(255,215,0,.18)}
+  .gate{min-height:100vh; padding:28px; background:
+    radial-gradient(900px 500px at 20% -10%, rgba(255,215,0,.08), transparent 50%),
+    radial-gradient(1200px 800px at 120% 10%, rgba(14,165,233,.08), transparent 60%),
+    #000;
+    position:relative; overflow:hidden; }
+  .particles::before, .particles::after{content:""; position:absolute; inset:0; background:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.12), transparent 40%),
+    radial-gradient(2px 2px at 80% 40%, rgba(255,255,255,.09), transparent 40%),
+    radial-gradient(2px 2px at 40% 70%, rgba(255,255,255,.07), transparent 40%);
+    animation: twinkle 8s infinite linear; opacity:.6; pointer-events:none;
+  }
+  @keyframes twinkle{0%{opacity:.3}50%{opacity:.8}100%{opacity:.3}}
+  .gate-card{max-width:820px; width:min(92vw,820px); margin:auto; text-align:center; padding:28px;
+    border:1px solid var(--line); border-radius:20px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); backdrop-filter: blur(2px);}
+  .gate h1{font-size:32px; margin:10px 0 2px; font-weight:800; letter-spacing:.3px;
+    background:linear-gradient(135deg,var(--gold-strong),#ffeab5); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 24px rgba(255,215,0,.15); }
+  .gate p.sub{margin:0; color:var(--muted)}
+  .lang-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:18px}
+  .lang-btn{cursor:pointer; border:1px solid var(--line); background:#0b1020; color:var(--fg);
+    padding:10px 14px; border-radius:12px; font-weight:700; transition:.25s; min-width:120px}
+  .lang-btn:hover{transform:translateY(-2px); border-color:#ffd700; box-shadow:0 6px 18px rgba(255,215,0,.12)}
+  .credit{margin-top:12px; font-size:13px; color:var(--muted)}
+
+  .intro{position:fixed; inset:0; display:grid; place-items:center; z-index:20;
+    background: radial-gradient(900px 600px at 50% -10%, rgba(255,215,0,.06), transparent 60%), #000; opacity:0; pointer-events:none; transition:opacity 1.4s ease}
+  .intro.show{opacity:1; pointer-events:auto}
+  .intro .inner{text-align:center; padding:28px; border:1px solid var(--line); border-radius:24px; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01))}
+  .intro h2{font-size:40px; margin:12px 0 0; font-weight:800; letter-spacing:.2px;
+    background:linear-gradient(135deg,#ffd700,#ffeab5); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 34px rgba(255,215,0,.25);}
+  .intro .en{font: 700 18px "Playfair Display",serif; color:#cfd6df; letter-spacing:.5px; margin-top:6px}
+  .intro .tag{margin-top:12px; color:#b9c2cf}
+  .intro .made{margin-top:10px; font-size:13px; color:#a3aab7}
+  .glow{position:absolute; inset:-20%; background:
+    radial-gradient(600px 300px at 50% 30%, rgba(255,215,0,.10), transparent 60%),
+    radial-gradient(700px 500px at 70% 80%, rgba(14,165,233,.10), transparent 65%);
+    filter: blur(30px); z-index:-1; animation: float 12s ease-in-out infinite alternate}
+  @keyframes float{from{transform:translateY(-10px)} to{transform:translateY(12px)}}
+
+  .content{opacity:0; transform:translateY(8px); transition:opacity 1.2s ease, transform 1s ease; padding:22px; max-width:1100px; margin:24px auto}
+  .content.show{opacity:1; transform:none}
+  header.brand{display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); margin-bottom:14px}
+  header.brand img{width:54px;height:54px;border-radius:12px;object-fit:cover;box-shadow:0 0 20px rgba(255,215,0,.2)}
+  header.brand .title{font-weight:800; letter-spacing:.3px; font-size:20px}
+  .section{border:1px solid var(--line); border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); padding:18px; margin:14px 0}
+  h3{color:#ffd700; font-size:22px; margin:0 0 10px}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .muted{color:var(--muted)}
+  ul{margin:0; padding:0 1.2em}
+  li{margin:.4em 0}
+  footer{text-align:center; color:var(--muted); margin:18px 0 24px}
+  .sig{margin-top:10px; color:#ffd700}
+
+  @media (max-width:900px){ .grid-2{grid-template-columns:1fr} .intro h2{font-size:34px} .gate h1{font-size:28px} }
+</style>
+</head>
+<body>
+
+<section class="gate particles" id="gate">
+  <div class="gate-card center">
+    <div>
+      <img src="yaffa-logo.png" alt="School Logo" class="logo" onerror="this.style.display='none'">
+      <h1>مدرسة يافا الشاملة</h1>
+      <p class="sub">اختر اللغة / Choose language / בחר שפה</p>
+      <div class="lang-row">
+        <button class="lang-btn" data-lang="ar">🇸🇦 العربية</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+        <button class="lang-btn" data-lang="he">🇮🇱 עברית</button>
+      </div>
+      <div class="credit">Made By <strong>@Karlonqq</strong> (محمود أبوقاعود)</div>
+    </div>
+  </div>
+</section>
+
+<section class="intro" id="intro">
+  <div class="glow"></div>
+  <div class="inner">
+    <img src="yaffa-logo.png" alt="School Logo" class="logo" onerror="this.style.display='none'">
+    <h2 id="introTitle">مدرسة يافا الشاملة</h2>
+    <div class="en" id="introSub">Yaffa Comprehensive School</div>
+    <div class="tag" id="introTag">نرحب بكم في رحاب مدرستنا المتميزة، حيث يلتقي الإبداع بالتقنية.</div>
+    <div class="made">Made By <strong>@Karlonqq</strong> (محمود أبوقاعود)</div>
+  </div>
+</section>
+
+<main class="content" id="content">
+  <header class="brand">
+    <img src="yaffa-logo.png" alt="School Logo" onerror="this.style.display='none'">
+    <div class="title" id="brandTitle">مدرسة يافا الشاملة — مشروع الخريطة الذكية</div>
+  </header>
+
+  <section class="section">
+    <h3 id="s_intro_h">مقدمة</h3>
+    <p id="s_intro_p">مشروع "الخريطة الذكية التفاعلية للمدرسة" هو مبادرة تقنية تُسهم في تحسين تجربة الزوار والطلاب داخل المدرسة، عبر صفحة ويب تُفتح من رمز QR عند المدخل وتوفر لاحقًا خريطة تفاعلية لتحديد المواقع والتوجيه.</p>
+  </section>
+
+  <section class="section grid-2">
+    <div>
+      <h3 id="s_goals_h">الأهداف</h3>
+      <ul id="s_goals_list">
+        <li>تجربة زائر سهلة وسريعة للعثور على الصفوف والمرافق.</li>
+        <li>تعزيز صورة المدرسة كمؤسسة تعليمية رقمية مبتكرة.</li>
+        <li>تخفيف الضغط على الإدارة خلال استقبال أولياء الأمور.</li>
+        <li>تمكين الطلاب من تطبيق التقنية عمليًا داخل المدرسة.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 id="s_how_h">آلية العمل</h3>
+      <ul id="s_how_list">
+        <li>وضع رمز QR عند بوابة المدرسة يفتح الموقع.</li>
+        <li>عرض خريطة/صور تفاعلية للمدرسة بأسماء الصفوف والمرافق.</li>
+        <li>خيار "أين أنا؟" لإظهار موقع المستخدم (اختياري).</li>
+        <li>اختيار وجهة ➜ مسار وإرشادات للوصول إليها.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section grid-2">
+    <div>
+      <h3 id="s_tools_h">التقنيات المقترحة</h3>
+      <ul id="s_tools_list">
+        <li>واجهة ويب: HTML / CSS / JavaScript.</li>
+        <li>خرائط: Leaflet.js أو Google Maps API (لاحقًا).</li>
+        <li>تحديد موقع: GPS/Wi‑Fi بإذن المستخدم (اختياري).</li>
+        <li>رمز QR للوصول السريع من الجوال.</li>
+        <li>استضافة خفيفة: GitHub Pages أو Netlify أو Firebase.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 id="s_timeline_h">الخطة الزمنية</h3>
+      <ul id="s_timeline_list">
+        <li>الأسبوع 1: تصوير المدرسة/جمع المخطط وتحديد النقاط المهمة.</li>
+        <li>الأسبوع 1–2: تصميم واجهة تفاعلية باسم المدرسة.</li>
+        <li>الأسبوع 1–2: برمجة الخريطة وربطها بخيار تحديد الموقع.</li>
+        <li>الأسبوع 1: اختبار تجريبي مع الإدارة والطلاب.</li>
+        <li>1–3 أيام: إطلاق رسمي ووضع QR عند البوابة.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section grid-2">
+    <div>
+      <h3 id="s_privacy_h">الخصوصية والأمان</h3>
+      <p id="s_privacy_p">طلب تحديد الموقع اختياري تمامًا، ولا تُحفظ أي بيانات شخصية. يعمل المشروع دون تسجيل دخول، ويمكن تشغيله بدون ميزة الموقع.</p>
+    </div>
+    <div>
+      <h3 id="s_future_h">التطوير المستقبلي</h3>
+      <ul id="s_future_list">
+        <li>بحث صوتي عن الصفوف والمرافق.</li>
+        <li>دعم طبقات حسب المراحل/الأدوار.</li>
+        <li>نظام إشعارات للفعاليات المدرسية.</li>
+        <li>واجهة إدارة لتحديث البيانات بسهولة.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div id="footer_note">تم إعداد وعرض الفكرة بواسطة <strong>محمود أبوقاعود (Karlonqq)</strong> — وبإذن الله سيتم تنفيذ جميع مراحل المشروع بدقة وكفاءة.</div>
+    <div class="sig">Yaffa Comprehensive School</div>
+  </footer>
+</main>
+
+<script>
+const TXT = {{
+  ar: {{brand:"مدرسة يافا الشاملة — مشروع الخريطة الذكية",introTitle:"مدرسة يافا الشاملة",introSub:"Yaffa Comprehensive School",introTag:"نرحب بكم في رحاب مدرستنا المتميزة، حيث يلتقي الإبداع بالتقنية.",
+    h_intro:"مقدمة",p_intro:"مشروع \"الخريطة الذكية التفاعلية للمدرسة\" هو مبادرة تقنية تُسهم في تحسين تجربة الزوار والطلاب داخل المدرسة، عبر صفحة ويب تُفتح من رمز QR عند المدخل وتوفر لاحقًا خريطة تفاعلية لتحديد المواقع والتوجيه.",
+    h_goals:"الأهداف",goals:["تجربة زائر سهلة وسريعة للعثور على الصفوف والمرافق.","تعزيز صورة المدرسة كمؤسسة تعليمية رقمية مبتكرة.","تخفيف الضغط على الإدارة خلال استقبال أولياء الأمور.","تمكين الطلاب من تطبيق التقنية عمليًا داخل المدرسة."],
+    h_how:"آلية العمل",how:["وضع رمز QR عند بوابة المدرسة يفتح الموقع.","عرض خريطة/صور تفاعلية للمدرسة بأسماء الصفوف والمرافق.","خيار \"أين أنا؟\" لإظهار موقع المستخدم (اختياري).","اختيار وجهة ➜ مسار وإرشادات للوصول إليها."],
+    h_tools:"التقنيات المقترحة",tools:["واجهة ويب: HTML / CSS / JavaScript.","خرائط: Leaflet.js أو Google Maps API (لاحقًا).","تحديد موقع: GPS/Wi‑Fi بإذن المستخدم (اختياري).","رمز QR للوصول السريع من الجوال.","استضافة خفيفة: GitHub Pages أو Netlify أو Firebase."],
+    h_timeline:"الخطة الزمنية",timeline:["الأسبوع 1: تصوير المدرسة/جمع المخطط وتحديد النقاط المهمة.","الأسبوع 1–2: تصميم واجهة تفاعلية باسم المدرسة.","الأسبوع 1–2: برمجة الخريطة وربطها بخيار تحديد الموقع.","الأسبوع 1: اختبار تجريبي مع الإدارة والطلاب.","1–3 أيام: إطلاق رسمي ووضع QR عند البوابة."],
+    h_privacy:"الخصوصية والأمان",p_privacy:"طلب تحديد الموقع اختياري تمامًا، ولا تُحفظ أي بيانات شخصية. يعمل المشروع دون تسجيل دخول، ويمكن تشغيله بدون ميزة الموقع.",
+    h_future:"التطوير المستقبلي",future:["بحث صوتي عن الصفوف والمرافق.","دعم طبقات حسب المراحل/الأدوار.","نظام إشعارات للفعاليات المدرسية.","واجهة إدارة لتحديث البيانات بسهولة."],
+    footer:'تم إعداد وعرض الفكرة بواسطة <strong>محمود أبوقاعود (Karlonqq)</strong> — وبإذن الله سيتم تنفيذ جميع مراحل المشروع بدقة وكفاءة.'}},
+  en: {{brand:"Yaffa Comprehensive School — Smart Map Project",introTitle:"Yaffa Comprehensive School",introSub:"Yaffa Comprehensive School",introTag:"Welcome to our distinguished school, where creativity meets technology.",
+    h_intro:"Overview",p_intro:"The “Smart Interactive School Map” is a technology initiative that improves visitors’ and students’ on-campus experience. A QR code at the gate opens a web page that will later host an interactive map for indoor guidance.",
+    h_goals:"Goals",goals:["Make navigation easy and fast for visitors and students.","Position the school as an innovative digital institution.","Reduce front-desk load during parent visits.","Enable students to apply technology to real problems."],
+    h_how:"How it works",how:["A QR code at the main gate opens the site.","An interactive map/photos with labeled rooms and facilities.","An optional “Where am I?” feature to show user location.","Choose a destination ➜ show a simple path and guidance."],
+    h_tools:"Tech stack",tools:["Frontend: HTML / CSS / JavaScript.","Mapping: Leaflet.js or Google Maps API (later).","Location: GPS/Wi‑Fi with user permission (optional).","QR for mobile access.","Light hosting: GitHub Pages / Netlify / Firebase."],
+    h_timeline:"Timeline",timeline:["Week 1: Capture campus layout / key points.","Week 1–2: Design a branded interactive UI.","Week 1–2: Build the map and location option.","Week 1: Pilot test with staff and students.","1–3 days: Official launch and QR placement."],
+    h_privacy:"Privacy & Safety",p_privacy:"Location access is fully optional and no personal data is stored. The system works without accounts, and can operate without location services.",
+    h_future:"Future Enhancements",future:["Voice search for rooms/facilities.","Layered views by grades/floors.","School events notifications.","Admin panel to update data easily."],
+    footer:'Prepared and presented by <strong>Mahmoud Abuqaoud (Karlonqq)</strong> — With God’s will, all phases will be executed accurately and efficiently.'}},
+  he: {{brand:"בית ספר יפו המקיף — פרויקט המפה החכמה",introTitle:"בית ספר יפו המקיף",introSub:"Yaffa Comprehensive School",introTag:"ברוכים הבאים לבית ספרנו המצטיין, שבו יצירתיות פוגשת טכנולוגיה.",
+    h_intro:"הקדמה",p_intro:"״המפה החכמה של בית הספר״ היא יוזמה טכנולוגית לשיפור חוויית המבקרים והתלמידים. קוד QR בשער יוביל לדף אינטרנט שבו תוצג בהמשך מפה אינטראקטיבית להכוונה בפנים הקמפוס.",
+    h_goals:"מטרות",goals:["ניווט קל ומהיר לתלמידים ולמבקרים.","חיזוק תדמית בית הספר כמוסד דיגיטלי חדשני.","הפחתת העומס בקבלת ההורים.","העצמת תלמידים ליישם טכנולוגיה לבעיות אמיתיות."],
+    h_how:"כיצד זה עובד",how:["קוד QR בשער הראשי פותח את האתר.","מפה/תמונות אינטראקטיביות עם שמות כיתות ומתקנים.","אפשרות \"איפה אני?\" להצגת מיקום המשתמש (אופציונלי).","בחירת יעד ➜ מסלול והנחיות פשוטות."],
+    h_tools:"כלים וטכנולוגיות",tools:["ממשק קדמי: HTML / CSS / JavaScript.","מיפוי: Leaflet.js או Google Maps API (בהמשך).","מיקום: GPS/Wi‑Fi באישור המשתמש (אופציונלי).","קוד QR לגישה סלולרית.","אירוח קל: GitHub Pages / Netlify / Firebase."],
+    h_timeline:"ציר זמן",timeline:["שבוע 1: מיפוי הקמפוס / נקודות מפתח.","שבוע 1–2: עיצוב UI ממותג ואינטראקטיבי.","שבוע 1–2: בניית המפה ואפשרות המיקום.","שבוע 1: פיילוט עם צוות ותלמידים.","1–3 ימים: השקה רשמית והצבת QR."],
+    h_privacy:"פרטיות ובטיחות",p_privacy:"הענקת הרשאת מיקום היא אופציונלית לחלוטין ואין שמירת נתונים אישיים. המערכת עובדת ללא חשבונות, ויכולה לפעול ללא שירותי מיקום.",
+    h_future:"שדרוגים עתידיים",future:["חיפוש קולי של כיתות/מתקנים.","שכבות לפי שכבות גיל/קומות.","התראות על אירועי בית הספר.","ממשק ניהול לעדכון נתונים בקלות."],
+    footer:'הוכן והוצג על ידי <strong>מחמוד אבוקאעוד (Karlonqq)</strong> — בעזרת השם, כל השלבים יתבצעו בדיוק וביעילות.'}}
+}};
+
+function applyLang(lang){
+  const t = TXT[lang];
+  document.getElementById('brandTitle').textContent = t.brand;
+  document.getElementById('s_intro_h').textContent = t.h_intro;
+  document.getElementById('s_intro_p').textContent = t.p_intro;
+  document.getElementById('s_goals_h').textContent = t.h_goals;
+  document.getElementById('s_goals_list').innerHTML = t.goals.map(x=>`<li>${{x}}</li>`).join('');
+  document.getElementById('s_how_h').textContent = t.h_how;
+  document.getElementById('s_how_list').innerHTML = t.how.map(x=>`<li>${{x}}</li>`).join('');
+  document.getElementById('s_tools_h').textContent = t.h_tools;
+  document.getElementById('s_tools_list').innerHTML = t.tools.map(x=>`<li>${{x}}</li>`).join('');
+  document.getElementById('s_timeline_h').textContent = t.h_timeline;
+  document.getElementById('s_timeline_list').innerHTML = t.timeline.map(x=>`<li>${{x}}</li>`).join('');
+  document.getElementById('s_privacy_h').textContent = t.h_privacy;
+  document.getElementById('s_privacy_p').textContent = t.p_privacy;
+  document.getElementById('s_future_h').textContent = t.h_future;
+  document.getElementById('s_future_list').innerHTML = t.future.map(x=>`<li>${{x}}</li>`).join('');
+  document.getElementById('footer_note').innerHTML = t.footer;
+
+  document.getElementById('introTitle').textContent = t.introTitle;
+  document.getElementById('introSub').textContent = t.introSub;
+  document.getElementById('introTag').textContent = t.introTag;
+
+  document.documentElement.dir = (lang === 'en') ? 'ltr' : 'rtl';
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    applyLang(lang);
+    document.getElementById('gate').classList.add('hidden');
+    startIntro();
+  });
+});
+
+// WebAudio royal intro (no external files)
+let audioCtx = null, master = null;
+function playRoyalIntro(){
+  try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return; }
+  master = audioCtx.createGain(); master.gain.value = 0.0001; master.connect(audioCtx.destination);
+  const now = audioCtx.currentTime;
+  const freqs = [261.63, 329.63, 392.00, 523.25]; // C,E,G,C
+  const filter = audioCtx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=1800; filter.Q.value=0.8; filter.connect(master);
+  const delay = audioCtx.createDelay(1.5); delay.delayTime.value=0.35;
+  const fb = audioCtx.createGain(); fb.gain.value=0.25; delay.connect(fb); fb.connect(delay);
+  const mix = audioCtx.createGain(); mix.gain.value=0.6; mix.connect(delay); mix.connect(filter);
+  freqs.forEach((f,i)=>{
+    const osc = audioCtx.createOscillator(); osc.type = i%2 ? 'triangle' : 'sine';
+    const g = audioCtx.createGain(); g.gain.setValueAtTime(0.0001, now);
+    g.gain.exponentialRampToValueAtTime(0.28, now+1.0);
+    g.gain.setTargetAtTime(0.20, now+2.0, 1.0);
+    g.gain.setTargetAtTime(0.12, now+6.0, 2.0);
+    osc.frequency.value = f; osc.connect(g); g.connect(mix);
+    osc.start(now + 0.05*i); osc.stop(now + 9.5);
+  });
+  master.gain.exponentialRampToValueAtTime(0.9, now+1.2);
+  master.gain.setTargetAtTime(0.6, now+5.5, 2.0);
+  master.gain.exponentialRampToValueAtTime(0.001, now+10.0);
+  setTimeout(()=>{ try{{audioCtx && audioCtx.close();}}catch(e){{}} }, 11000);
+}
+
+function startIntro(){
+  const intro = document.getElementById('intro');
+  const content = document.getElementById('content');
+  intro.classList.add('show');
+  // Attempt autoplay; if blocked, enable on first interaction
+  try{
+    const resume = () => audioCtx && audioCtx.state === 'suspended' && audioCtx.resume();
+    playRoyalIntro();
+    document.addEventListener('touchstart', resume, {once:true});
+    document.addEventListener('click', resume, {once:true});
+  }catch(e){}
+
+  setTimeout(()=>{
+    intro.style.opacity='0';
+    setTimeout(()=>{
+      intro.classList.remove('show'); intro.style.display='none';
+      document.body.style.overflow='auto'; content.classList.add('show');
+    }, 1400);
+  }, 10000);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ملصق QR — يافا الشاملة (عرض متعدد اللغات)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;display:grid;place-items:center;min-height:100vh;background:#000;color:#f5f5f5;font-family:"Cairo",system-ui}
+  .poster{border:2px solid #ffd700;padding:30px;border-radius:20px;text-align:center;max-width:720px;width:92%}
+  h1{color:#ffd700;margin-bottom:10px}
+  .muted{color:#aaa}
+  img{margin:20px 0;width:300px;height:300px}
+  .url{direction:ltr;background:#0b1020;border:1px solid #1f2937;border-radius:10px;padding:8px 12px;display:inline-block}
+</style>
+</head>
+<body>
+  <div class="poster">
+    <h1>📱 امسح الرمز لفتح العرض الفخم (3 لغات)</h1>
+    <p class="muted">العربية • English • עברית — شاشة ترحيب موسيقية ثم شرح كامل للمشروع</p>
+    <img id="qr" alt="QR Code" src="" decoding="async">
+    <div id="url" class="muted url">https://example.com/yaffa</div>
+    <p class="muted">إن لم يعمل المسح، افتح الرابط يدويًا.</p>
+  </div>
+<script>
+  const LANDING_URL = 'https://example.com/yaffa'; // 🔁 بدّل هذا بالرابط الحقيقي بعد الرفع
+  document.getElementById('url').textContent = LANDING_URL;
+  document.getElementById('qr').src = 'https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=' + encodeURIComponent(LANDING_URL);
+</script>
+</body>
+</html>
